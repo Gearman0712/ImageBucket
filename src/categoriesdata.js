@@ -1,0 +1,2 @@
+var as = ["amit" ,"kumar","aad","dsdf","adsfa","gsdgsd","qwert","amdfjnfvhfgr","asdhgfa","asdfasd","iouioijhui","huyghb","yuyuyuyuyuyuyu","amit" ,"kumar","aad","dsdf","adsfa","gsdgsd","qwert","amdfjnfvhfgr","asdhgfa",];
+export default as;
