@@ -13,10 +13,10 @@ export default function TemporaryDrawer(props) {
   const [state, setState] = React.useState(false);
 
    useEffect(() => {
-      setState(props.content);
+      setState(props.status);
 
 
-   }, [props.content])
+   }, [props.status])
 
 
   const toggleDrawer = (open) => (event) => {
@@ -38,25 +38,14 @@ export default function TemporaryDrawer(props) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <h3>  Title: {props.content.title} </h3>
+      <img src={props.content.url} alt="loading" width="200" height="200"/>
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <h6>  categories: {props.content.categories} </h6>
+      <h5>  Date and Time: {props.content.date} </h5>
+    
       </List>
     </div>
   );

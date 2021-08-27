@@ -28,8 +28,10 @@ const useStyles = makeStyles((theme) => ({
     
   },
 }));
-function Left_part() {
-  console.log(categoriesdata);
+function Left_part(props) {
+  console.log("leftpart");
+  console.log(props.category);
+  console.log("leftpart1");
   const classes = useStyles();
   return (<>
   <List className={classes.root} subheader={<li />}>
@@ -38,7 +40,7 @@ function Left_part() {
       <ul className={classes.ul}>
         <ListSubheader><h1 id='category_heading'>Categories</h1></ListSubheader>
         {
-          [...categoriesdata].map((item) => (
+          [...props.category].map((item) => (
           <ListItem key={`item-${sectionId}-${item}`}>
             <ListItemText className ="liOfcategory"  primary={` ${item.toUpperCase()}`} />
           </ListItem>

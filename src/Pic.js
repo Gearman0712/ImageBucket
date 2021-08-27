@@ -17,9 +17,10 @@ const useStyles = makeStyles({
 export default function Pic(props) {
 
   const classes = useStyles();
+  console.log(props.item);
 const changeOpen =() =>{
   console.log('yuyuy');
-props.opendetails(true);
+props.opendetails(true, props.item);
 }
   return (
       <>
@@ -31,13 +32,13 @@ props.opendetails(true);
           alt="IMAGE"
           height="140"
           
-          image = {props.item.src}
+          image = {props.item.url}
        
           title={props.item.title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-          {props.item.title}
+          {/* {props.item.categories} */}
           </Typography>
           
         </CardContent>
