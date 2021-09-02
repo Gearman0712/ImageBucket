@@ -75,8 +75,9 @@ export default function Upload_button1(props) {
    console.log('firle');
    console.log(url);
    console.log(predictions);
+   var am =file.name;
       var metadata = {
-       title: file.name,
+       title: am.toLowerCase(),
        date : new  Date().toLocaleString(),
        categories : str ,
        url:url

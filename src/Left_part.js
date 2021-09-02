@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Left_part(props) {
+ 
   console.log("leftpart");
   console.log(props.category);
   console.log("leftpart1");
@@ -42,7 +43,7 @@ function Left_part(props) {
         {
           [...props.category].map((item) => (
           <ListItem key={`item-${sectionId}-${item}`}>
-            <ListItemText className ="liOfcategory"  primary={` ${item.toUpperCase()}`} />
+            <ListItemText className ="liOfcategory"  primary={` ${item.toUpperCase()}` } onClick ={(item) =>{props.changeSearchOncategory(item)}} />
           </ListItem>
         ))}
       </ul>

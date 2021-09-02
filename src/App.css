@@ -133,3 +133,14 @@
 
   margin: 2vmin;
 }
+/* .drawerImg{
+  padding-top :2rem;
+  padding-left: 4rem; 
+  
+} */
+.drawerImgMain{
+  padding-top :2rem;
+  padding-left: 2rem; 
+  min-width: 350px;
+  max-width: 350px;
+}
