@@ -1,5 +1,5 @@
-# ImageRepository
-Welcome to Image Repository, your own library of images, which helps you to add, delete and classify images into groups! The App is built on top of ReactJS. 
+# Image Bucket
+Welcome to Image Bucket, your own library of images, which helps you to add, delete and classify images into groups! The App is built on top of ReactJS. 
 | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="500" />  | ![Firebase](https://miro.medium.com/max/300/1*R4c8lHBHuH5qyqOtZb3h-w.png)  | ![TesseractJS](https://twilio-cms-prod.s3.amazonaws.com/images/tesseract-featured-image.width-808.png)  | ![Tensorflow](https://pbs.twimg.com/profile_images/1103339571977248768/FtFnqC38.png)  |
 |---|---|---|---|
 ## Algorithm/Features
