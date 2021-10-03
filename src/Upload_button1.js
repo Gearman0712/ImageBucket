@@ -6,12 +6,19 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import BackupIcon from '@material-ui/icons/Backup';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
 import {storage,dbRef} from "./firebase.js";
 import {useAuth} from './AuthContext'
 import '@tensorflow/tfjs-backend-cpu';
 
 const mobilenet = require('@tensorflow-models/mobilenet');
 const admin = require('firebase-admin');
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
   root: {
    
@@ -39,13 +46,33 @@ export default function Upload_button1(props) {
   const [file, setFile] = useState(null);
   const [predictions, setPredictions] = useState(null);
   const {currentUser} = useAuth();
+  const [open, setOpen] = React.useState(false);
+  const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
+  const handleAlert = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+    setMessage('');
+    setSeverity('');
+  };
  
 //  console.log(items)
   // useEffect(()=>{console.log('upload')},[file,url , predictions]);
 
    async function handleChange(e) {
     setFile(e.target.files[0]);
-    if(e.target.files[0] ==null)  console.log(`not an image, the image file is a ${typeof(imageAsFile)}`);
+    if(e.target.files[0] ==null) { 
+ setMessage(`not an image, the image file is a ${typeof(imageAsFile)}`);
+     setSeverity('warning');
+     handleAlert();
+  }
     else
     {   handleUpload(e)
         getPredictions(e);
@@ -105,7 +132,9 @@ export default function Upload_button1(props) {
    model.classify(img).then(prediction => {
        
         setPredictions(prediction);
-        
+        setMessage('Succesfully Analysed');
+        setSeverity('success');
+        handleAlert();
         return prediction;
        
       });
@@ -123,7 +152,9 @@ export default function Upload_button1(props) {
         .then((url) => {
           setURL(url);
           console.log(url);
-          
+          setMessage('Succesfully uploaded');
+          setSeverity('success');
+          handleAlert();
         });
     });
  
@@ -138,7 +169,12 @@ export default function Upload_button1(props) {
    
     
     <div className={classes.root, 'upload_button' }>
-     
+       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity}>
+         { message}
+      
+        </Alert>
+      </Snackbar>
    
      <Tooltip title="Upload Photo" aria-label="add" className={classes.absolute} >
      <div>

@@ -35,10 +35,13 @@ function Left_part(props) {
   console.log("leftpart1");
   function handleclick (e)
   { props.changeSearchOncategory(e.target.innerHTML); 
-   // (item) =>{props.changeSearchOncategory(item)
    console.log("handleclick");
       console.log(e.target.innerHTML);
   
+  }
+  function handleClearCategory(e)
+  {
+    props.changeSearchOncategory("")
   }
 
   const classes = useStyles();
@@ -47,7 +50,7 @@ function Left_part(props) {
   {[0].map((sectionId) => (
     <li key={`section-${sectionId}`} className={classes.listSection}>
       <ul className={classes.ul}>
-        <ListSubheader><h1 id='category_heading'>Categories</h1></ListSubheader>
+        <ListSubheader><h1 id='category_heading' onClick ={handleClearCategory} >Categories</h1></ListSubheader>
         {
           [...props.category].map((item) => (
           <ListItem key={`item-${sectionId}-${item}`}>

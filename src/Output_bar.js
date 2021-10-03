@@ -4,8 +4,13 @@ import Upload_button1 from './Upload_button1'
 //import items from './items.js'
 import Drawer from './Drawer.js'
 import {storage,dbRef} from "./firebase.js";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import {link , useHistory} from 'react-router-dom';
 
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 export const Output_bar = (props) => {
 
     const [content ,setContent] = useState({});
@@ -14,6 +19,25 @@ export const Output_bar = (props) => {
     const [displayList ,setdisplayList] = useState([]);
     const [tempDisplayList ,settempDisplayList] = useState([]);
     const [triger ,setTriger] = useState(false);
+    const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
+ 
+
+              const [open, setOpen] = React.useState(false);
+
+              const handleAlert = () => {
+                setOpen(true);
+              };
+
+              const handleClose = (event, reason) => {
+                if (reason === 'clickaway') {
+                  return;
+                }
+
+                setOpen(false);
+                setMessage('');
+                setSeverity('');
+              };
    
     useEffect( async()=>{
       const citiesRef = dbRef.collection('list');
@@ -62,12 +86,17 @@ setCategory(newunique);
      //2.
       pictureRef.delete()
         .then(() => {
-          //3.
-          //setImages(allImages.filter((image) => image !== url));
-          console.log("Picture is deleted successfully!");
+      
+        
+          setMessage("Picture is deleted successfully!");
+          setSeverity('success');
+          handleAlert();
+
         })
         .catch((err) => {
           console.log(err);
+
+
         });
     };
   
@@ -109,7 +138,23 @@ setCategory(newunique);
   settempDisplayList(filtered);
 
     }
-    useEffect(()=>{console.log('hi')},[content,displayList,tempDisplayList]);
+    useEffect(()=>{
+    }
+    
+    ,[content,displayList,tempDisplayList]);
+    useEffect(()=>{
+      var cat=[];
+      for( let i=0;i<displayList.length ;i++)
+      {var arr = displayList[i].data().categories.split(",");
+      cat.push(...arr);
+      }
+  
+      setCategory(cat);
+      props.addCategory(cat);
+      }
+    
+    ,[displayList]);
+    
     const deleteMainFunction = async(item) =>{
      
       
@@ -124,6 +169,12 @@ setCategory(newunique);
 
     return (
         <>
+         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity}>
+         { message}
+      
+        </Alert>
+      </Snackbar>
         <div className ="main_output">
          
         {tempDisplayList.map((ele)=>{
