@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# ImageRepository
+Welcome to Image Repository, your own library of images, which helps you to add, delete and classify images into groups! The App is built on top of ReactJS. 
+| <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="500" />  | ![Firebase](https://miro.medium.com/max/300/1*R4c8lHBHuH5qyqOtZb3h-w.png)  | ![TesseractJS](https://twilio-cms-prod.s3.amazonaws.com/images/tesseract-featured-image.width-808.png)  | ![Tensorflow](https://pbs.twimg.com/profile_images/1103339571977248768/FtFnqC38.png)  |
+|---|---|---|---|
+## Algorithm/Features
+- The images chosen by a user are uploaded to Firebase Storage/ Google Cloud Platform storage buckets.(To choose an image, hover to the cloud button at the bottom right position)
+- The Image is passed through [TesseractJS](https://tesseract.projectnaptha.com/) to identify characters!(OCR)
+- The Image is then passed through [TensorflowJS's MobileNet Image Classification model](https://github.com/tensorflow/tfjs-models/tree/master/mobilenet) to get labels related to the image.
+- The data collected from the above two steps is uploaded to Firestore database(NoSQL).
+- To search image labels, type a search term in the search box.(multiple queries, should be comma separated, eg: "cat, grass" with no trailing commas)
+- A list of identified labels appears on the left sidebar, which on clicking, shows the images corresponding to the clicked label!
+- The images can also searched on the basis of another chosen image, to those the image query, click on the camera button next to the search bar!
+- The images can be deleted from the library by clicking the `Delete` button corresponding to an image.
+- Information about images can be retreived by clicking the `Details` button corresponding to an image.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Use the development Version
+- Make sure, the latest version of Node and NPM are installed!
+- Clone the project!
+- Install the necessary NPM dependencies using `npm install`.
+- [Create](https://firebase.google.com/docs/web/setup) a Firebase project and integrate the App with the Firebase project!
+- Place the Firebase config in ImageRepository/FirebaseConfig.js in the following format!
+```js
+var firebaseConfig = {
+  apiKey: "api-key",
+  authDomain: "project-id.firebaseapp.com",
+  databaseURL: "https://project-id.firebaseio.com",
+  projectId: "project-id",
+  storageBucket: "project-id.appspot.com",
+  messagingSenderId: "sender-id",
+  appId: "app-id",
+  measurementId: "G-measurement-id",
+};
 
-In the project directory, you can run:
+export default firebaseConfig;
+```
+- To start the project, use `npm start`.
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Notes!
+- The app uses TensorflowJS MobileNet's pretrained model which only use browser resources instead of a GPU, so the performance may be a bit lower, as compared to **paid** cloud solutions like Google Cloud Vision, Amazon Rekognition or Azure Computer Vision!
+- **Only for the users testing the development version** - While running `npm run build`, The user may face issues in the production version,(not the currently hosted version), please refer [this](https://github.com/tensorflow/tfjs/issues/3384#issuecomment-667607535) to fix the Tensorflow issue.
