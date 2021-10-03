@@ -42,16 +42,19 @@ setCategory(newunique);
       console.log(itemswithId);
       console.log("tata");
     },[triger]);
-useEffect(() => {
-  if(props.searchOnCategory!="")
-    {
-      
 
+ useEffect(() => {
+   if(props.searchOnCategory==="" || props.searchBasedOnAnything==="")
+   settempDisplayList(displayList);
+   if(props.searchOnCategory!=="" || props.searchBasedOnAnything!=="")
+    {  searchOnDisplayList(props.searchOnCategory,props.searchBasedOnAnything);
 
     }
 
 
-}, [props.searchOnCategory])
+ }, [props.searchBasedOnAnything,props.searchOnCategory]);
+
+
 
     const deleteFromFirebase = (url) => {
       //1.
@@ -69,11 +72,26 @@ useEffect(() => {
     };
   
 
-    const searchOnTempList =() =>{
-       
-
+    const searchOnDisplayList =( cat1 ,keyword) =>{
+     
+           settempDisplayList([]);
+           var temparray =[];
+     for( let i=0;i<displayList.length;i++)
+     {  console.log("shock");
+        let str1 =displayList[i].data().title ;
+        let str2 =displayList[i].data().categories ;
+      console.log(str1 +" "+str2+"heloo")
+        if(str1.search(cat1) !=-1 ||str2.search(cat1)!=-1  ||cat1==="")
+        if(str1.search(keyword) !=-1 ||str2.search(keyword)!=-1 ||keyword=="")
+        temparray.push(displayList[i]);
+        // tempDisplayList.push(displayList[i]);
+     }
+     console.log(temparray);
+     console.log("uppar");
+     settempDisplayList(temparray);
 
     };
+  
 
     const deleteFromdisplayList =(item) =>{
       var array = [...displayList];
@@ -103,7 +121,7 @@ useEffect(() => {
         <>
         <div className ="main_output">
          
-        {displayList.map((ele)=>{
+        {tempDisplayList.map((ele)=>{
       return<div className ="eachitem">
        <Pic item ={ele}
         deleteItem ={(dataID) =>{

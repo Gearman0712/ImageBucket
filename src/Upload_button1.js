@@ -54,10 +54,11 @@ export default function Upload_button1(props) {
     useEffect(async()=>{
    if((file!== null) && (url!=="") && (predictions != null))
      { var str="";
-      
+     console.log('prediction');
       for( var i=0 ;i<predictions.length ;i++)
-      {
-          str += predictions[i].className;
+      {   console.log(predictions[i].className+"ty");
+     let cat=predictions[i].className;
+          str +=cat.toLowerCase();
           if(i!==predictions.length -1)
           str += ", ";
  

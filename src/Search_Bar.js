@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -10,9 +10,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search_Bar() {
+export default function Search_Bar(props) {
   const classes = useStyles();
+  const [keyword, setKeyword] = useState("");
+  function handlekeywordchange(e)
+  {setKeyword(e.target.value);
 
+    props.search(e.target.value);
+  }
+  useEffect(() => {
+   //just reload
+  }, [keyword])
   return (
     <div>
       
@@ -22,7 +30,7 @@ export default function Search_Bar() {
             <ImageSearchIcon />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Search" />
+            <TextField value={keyword} onChange={handlekeywordchange} id="input-with-icon-grid" label="Search"  focused/>
           </Grid>
         </Grid>
       </div>

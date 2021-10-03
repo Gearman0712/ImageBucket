@@ -10,7 +10,7 @@ function Right_part(props) {
         setSearchBasedOnAnything("");
     }, [props.searchOnCategory])
     useEffect(() => {
-        
+        //do nothing just reload
     }, [searchBasedOnAnything])
 
     return (
