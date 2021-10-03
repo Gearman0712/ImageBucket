@@ -8,6 +8,7 @@ function Right_part(props) {
     const [searchBasedOnAnything ,setSearchBasedOnAnything] = useState("");
     useEffect(() => {
         setSearchBasedOnAnything("");
+        console.log("hello mic testing")
     }, [props.searchOnCategory])
     useEffect(() => {
         //do nothing just reload

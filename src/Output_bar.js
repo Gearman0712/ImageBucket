@@ -76,14 +76,19 @@ setCategory(newunique);
      
            settempDisplayList([]);
            var temparray =[];
+           keyword.trim();
+           cat1 = cat1.toLowerCase().trim();
+           console.log(cat1+" "+keyword+"mic");
      for( let i=0;i<displayList.length;i++)
      {  console.log("shock");
         let str1 =displayList[i].data().title ;
         let str2 =displayList[i].data().categories ;
+        str1.toLowerCase();
+        str2.toLowerCase();
       console.log(str1 +" "+str2+"heloo")
-        if(str1.search(cat1) !=-1 ||str2.search(cat1)!=-1  ||cat1==="")
-        if(str1.search(keyword) !=-1 ||str2.search(keyword)!=-1 ||keyword=="")
-        temparray.push(displayList[i]);
+        if(str1.search(cat1)!==-1 || (str2.search(cat1)!==-1)  ||cat1==="")
+     {  if(keyword==="" ||keyword!=="" && (str1.search(keyword) !==-1 ||(str2.search(keyword)!==-1 )))
+        temparray.push(displayList[i]);}
         // tempDisplayList.push(displayList[i]);
      }
      console.log(temparray);

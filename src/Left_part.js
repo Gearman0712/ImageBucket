@@ -33,9 +33,17 @@ function Left_part(props) {
   console.log("leftpart");
   console.log(props.category);
   console.log("leftpart1");
+  function handleclick (e)
+  { props.changeSearchOncategory(e.target.innerHTML); 
+   // (item) =>{props.changeSearchOncategory(item)
+   console.log("handleclick");
+      console.log(e.target.innerHTML);
+  
+  }
+
   const classes = useStyles();
   return (<>
-  <List className={classes.root} subheader={<li />}>
+  <List id = "parent-list" className={classes.root} subheader={<li />}>
   {[0].map((sectionId) => (
     <li key={`section-${sectionId}`} className={classes.listSection}>
       <ul className={classes.ul}>
@@ -43,7 +51,9 @@ function Left_part(props) {
         {
           [...props.category].map((item) => (
           <ListItem key={`item-${sectionId}-${item}`}>
-            <ListItemText className ="liOfcategory"  primary={` ${item.toUpperCase()}` } onClick ={(item) =>{props.changeSearchOncategory(item)}} />
+            <ListItemText className ="liOfcategory"  primary={` ${item.toUpperCase()}` } onClick ={handleclick}/>;
+           
+           
           </ListItem>
         ))}
       </ul>
