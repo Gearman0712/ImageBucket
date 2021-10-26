@@ -9,7 +9,6 @@ Welcome to Image Bucket, your own library of images, which helps you to add, del
 - The data collected from the above two steps is uploaded to Firestore database(NoSQL).
 - To search image labels, type a search term in the search box.(multiple queries, should be comma separated, eg: "cat, grass" with no trailing commas)
 - A list of identified labels appears on the left sidebar, which on clicking, shows the images corresponding to the clicked label!
-- The images can also searched on the basis of another chosen image, to those the image query, click on the camera button next to the search bar!
 - The images can be deleted from the library by clicking the `Delete` button corresponding to an image.
 - Information about images can be retreived by clicking the `Details` button corresponding to an image.
 
